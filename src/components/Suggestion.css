@@ -3,20 +3,58 @@
     margin-top: 40px;
     height: 280px;
     width: 319px;
-    background-color: #cccbcb;
+ 
+}
+a{
+    text-decoration: none;
 }
 
-li{
-padding: 20px 0px 10px 0px;;
-    list-style: none;
-    display: flex;
+
+.dp-cont{
+  
+   display: flex;
+   
 }
-.dp-image{
-    
+.dp{
     height: 80px;
     width: 80px;
     border-radius: 50%;
-    margin-right: 25px;
-   
-   
+    border-radius: 50%;
 }
+.username-head-text{
+   margin: 2px 0 0 20px;
+   font-size: 20px;
+}
+.Uid-text{
+
+font-size: 12px;
+
+}
+.Sugg-image{
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
+.suggestions-list{
+    margin-top: 20px;
+}
+.suggestions-list .dp-cont{
+  margin-bottom: 30px;
+}
+
+.suggestions-list .dp{
+    height: 45px;
+    width: 45px;
+  }
+  
+  .sugg .follow-btn{
+    margin-left: 170%;
+    margin-top: -35px;
+
+  }
+  .sugg .swicth-btn{
+    margin-left: 150%;
+    margin-top: -35px;
+
+  }
