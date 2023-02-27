@@ -1,6 +1,8 @@
 * {
   box-sizing: border-box;
+  
 }
+
 
 body {
   margin: 0;
@@ -38,8 +40,9 @@ body {
 }
 
 .logo-img {
-  margin-left: 14px;
-  height: 32px;
+  margin-left: 10px;
+  height: 45px;
+  width: 50%;
 }
 
 .sidebar button {
