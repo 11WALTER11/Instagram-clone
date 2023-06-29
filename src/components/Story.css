@@ -1,0 +1,8 @@
+.story-circle {
+    border-radius: 20px;
+    border: 2px solid black;
+    margin-top: 120px;
+    width: 150px;
+    height: 150px;
+    background-color: aqua;
+}

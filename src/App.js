@@ -1,22 +1,15 @@
-
-
-import Post from './components/Post';
-import SideNav from './components/SideNav';
-import Suggestion from './components/Suggestion';
+import Post from "./components/Post";
+import SideNav from "./components/SideNav";
+import Story from "./components/Story";
+import Suggestion from "./components/Suggestion";
 
 function App() {
   return (
     <div className="App">
-     
-      <SideNav/>
-      <Suggestion/>
-      <Post/>
-   
-    
-
-
-
-   
+      {/* <Story /> */}
+      <SideNav />
+      <Suggestion />
+      <Post />
     </div>
   );
 }
