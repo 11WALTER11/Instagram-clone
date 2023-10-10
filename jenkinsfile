@@ -1,12 +1,51 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            // Use the official Node.js Docker image
+            image 'node:14'
+            // Specify a custom label for the Docker agent
+            label 'my-docker-agent'
+        }
+    }
+
+    environment {
+        // Define the Node.js version
+        NODE_VERSION = '14'
+    }
 
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                // Your build steps here
-                echo 'Building...'
+                // Checkout the source code from your Git repository
+                checkout scm
             }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                // Use Node.js version manager (nvm) to install the specified Node.js version
+                script {
+                    def nodeHome = tool 'NodeJS_' + NODE_VERSION
+                    env.PATH = "${nodeHome}/bin:${env.PATH}"
+                }
+
+                // Install project dependencies using npm
+                sh 'npm install'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                // Run your React app tests
+                sh 'npm test'
+            }
+        }
+    }
+
+    post {
+        always {
+            // Clean up workspace
+            cleanWs()
         }
     }
 }
