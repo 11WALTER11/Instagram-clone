@@ -1,51 +1,61 @@
 pipeline {
-    agent {
-        docker {
-            // Use the official Node.js Docker image
-            image 'node:14'
-            // Specify a custom label for the Docker agent
-            label 'my-docker-agent'
-        }
-    }
-
-    environment {
-        // Define the Node.js version
-        NODE_VERSION = '14'
-    }
+    agent none
 
     stages {
         stage('Checkout') {
+            agent {
+                docker {
+                    image 'node:14'
+                }
+            }
             steps {
-                // Checkout the source code from your Git repository
                 checkout scm
             }
         }
 
-        stage('Install Dependencies') {
-            steps {
-                // Use Node.js version manager (nvm) to install the specified Node.js version
-                script {
-                    def nodeHome = tool 'NodeJS_' + NODE_VERSION
-                    env.PATH = "${nodeHome}/bin:${env.PATH}"
+        stage('Build and Test') {
+            agent {
+                docker {
+                    image 'node:14'
                 }
-
-                // Install project dependencies using npm
-                sh 'npm install'
+            }
+            steps {
+                script {
+                    sh 'npm install'
+                    sh 'npm test'
+                    sh 'npm run build'
+                }
             }
         }
 
-        stage('Run Tests') {
+        stage('Deploy') {
+            agent {
+                docker {
+                    image 'node:14'  // Using the official Node.js image for deployment
+                }
+            }
             steps {
-                // Run your React app tests
-                sh 'npm test'
+                echo 'Deployment steps would go here'
+                echo 'For example, echo "Copying build artifacts to a remote server using SSH"'
+            }
+        }
+
+        stage('Clean Up') {
+            agent {
+                docker {
+                    image 'docker:latest'
+                }
+            }
+            steps {
+                // Remove Docker image or perform cleanup
+                sh 'docker rmi your_image_name'
             }
         }
     }
 
     post {
-        always {
-            // Clean up workspace
-            cleanWs()
+        success {
+            echo 'The pipeline has succeeded! Add more post-build actions if needed.'
         }
     }
 }
